@@ -17,7 +17,7 @@ It's easy, Kivy is simple to install. You can find out how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
 
 Basically it boils down to installing the Kivy framework and its dependencies: angle, glew, sdl2.
-For example on Windows which is what the screen builder currently runs on:
+For example on Windows:
 ```
 python -m pip install "kivy[base]" kivy_examples
 ```
