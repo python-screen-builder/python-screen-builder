@@ -8,6 +8,10 @@ This is what the main screen looks like:
 
 <img src="screenshot.png">
 
+```
+# it is fun to program in python
+```
+
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
