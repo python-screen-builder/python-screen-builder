@@ -1,4 +1,12 @@
-## Hi there 👋
+## Hi there 👋 pythonistas and GUI enthusiasts.
+
+## Welcome to the Python GUI Screen Builder project.
+
+The Python screen builder is an easy to use tool you can use to create and load a screen for an application.
+The GUI it uses is Kivy, but don't worry - the screen builder makes it easy and fun to use.
+This is what the main screen looks like:
+
+<img src="screenshot.png">
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
