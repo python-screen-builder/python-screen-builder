@@ -34,8 +34,6 @@ from gui import *
 from kivy.app import App
 from widget_screen import WidgetScreen
 
-global test_screen
-
 class TestScreen(WidgetScreen):
 
     def __init__(self, **kwargs):
@@ -60,7 +58,8 @@ class TestApp(App):
 if __name__ == '__main__':
     TestApp().run()
 ```
-
+First of all, you import from gui. That contains the code for all of the controls (widgets).
+Next you subclass from the WidgetScreen class.
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
