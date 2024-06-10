@@ -29,6 +29,7 @@ The json file contains all the information about the GUI controls. Also make sur
 It should automagically default to button1. That is how you can reference it in your Python application.
 
 Here is the sample code for a working application that loads the screen, test_button.json.
+
 You can use this python program as a template if you like:
 ```
 from gui import *
