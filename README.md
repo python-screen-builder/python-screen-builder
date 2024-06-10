@@ -58,12 +58,14 @@ class TestApp(App):
 if __name__ == '__main__':
     TestApp().run()
 ```
-If everything is working when you run the program:
+If everything is working when you run the test program:
 ```
 py test_app.py
 ```
 You should see a screen like this:
+
 <img src="screenshot2.png">
+
 And then when you click on the button ... it should say something in the console window.
 Now if you wanted to create an exe with no console window, you need to install pyinstaller.
 And you would do: pyinstaller -F --noconsole test_app.py
