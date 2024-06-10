@@ -67,9 +67,7 @@ You should see a screen like this:
 <img src="screenshot2.png">
 
 And then when you click on the button ... it should say something in the console window.
-Now if you wanted to create an exe with no console window, you need to install pyinstaller.
-And you would do: pyinstaller -F --noconsole test_app.py
-But that's another story, just try to get the inital test app to work first. 😉
+That's it for now, simple and easy to use. More to come, stay tunde ... 😉
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
