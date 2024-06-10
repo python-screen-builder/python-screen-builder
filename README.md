@@ -28,7 +28,7 @@ Select a Button control for instance, change its text, font, etc. Then File -> e
 The json file contains all the information about the GUI controls. Also make sure the name field is filled in.
 It should automagically default to button1. That is how you can reference it in your Python application.
 
-Here is the sample code for a working application that uses the screen: test_button.json
+Here is the sample code for a working application that uses the screen file test_button.json
 ```
 from gui import *
 from kivy.app import App
