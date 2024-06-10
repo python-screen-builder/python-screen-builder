@@ -63,7 +63,7 @@ If everything is working when you run the program:
 py test_app.py
 ```
 You should see a screen like this:
-<img src="screenshot.png">
+<img src="screenshot2.png">
 And then when you click on the button ... it should say something in the console window.
 Now if you wanted to create an exe with no console window, you need to install pyinstaller.
 And you would do: pyinstaller -F --noconsole test_app.py
