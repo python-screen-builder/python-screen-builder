@@ -70,9 +70,6 @@ And then when you click on the button ... it should say something in the console
 That's it for now, simple and easy to use.
 More to come, stay tuned ... 😉
 
-Oh, I almost forgot, here is a link to the zip file that contains the screen builder (Windows version currently) and associated files:
-<a href="">screen_builder.zip</a>
-
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
