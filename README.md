@@ -58,8 +58,16 @@ class TestApp(App):
 if __name__ == '__main__':
     TestApp().run()
 ```
-First of all, you import from gui. That contains the code for all of the controls (widgets).
-Next you subclass from the WidgetScreen class.
+If everything is working when you run the program:
+```
+py test_app.py
+```
+You should see a screen like this:
+<img src="screenshot.png">
+And then when you click on the button ... it should say something in the console window.
+Now if you wanted to create an exe with no console window, you need to install pyinstaller.
+And you would do: pyinstaller -F --noconsole test_app.py
+But that's another story, just try to get the inital test app to work first. 😉
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
