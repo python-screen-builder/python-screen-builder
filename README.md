@@ -21,6 +21,47 @@ For example on Windows which is what the screen builder currently runs on:
 ```
 python -m pip install "kivy[base]" kivy_examples
 ```
+## How to use
+
+First when you run the screen builder you can select from an array of GUI widgets on the sidebar.
+Select a button for instance, change its test, font, etc. Then File -> export -> test_screen.json
+The json file contains all the information about the GUI controls. Also make sure the name field is filled in.
+It should automagically default to button1. That is how you can reference it in your Python application.
+
+Here is the sample code for a working application that loads the screen. You can use this as a template if you like:
+```
+from gui import *
+from kivy.app import App
+from widget_screen import WidgetScreen
+
+global test_screen
+
+class TestScreen(WidgetScreen):
+
+    def __init__(self, **kwargs):
+        screen = kwargs.get('screen')
+        super(TestScreen, self).__init__(**kwargs)
+        self.screen = screen
+        self.load_screen()
+        self.button1.bind(on_press = self.on_press)
+
+    def on_press(self, button):
+        print("Button, button - you clicked the button!")
+        pass
+
+class TestApp(App):
+
+    def build(self):
+        Window.clearcolor = 'steelblue'
+        screen = Screen(name = "Test")
+        self.test_screen = TestScreen(file_name = 'test_button.json', screen = screen)
+        return screen
+
+if __name__ == '__main__':
+    TestApp().run()
+```
+
+
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
