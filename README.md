@@ -9,7 +9,7 @@ This is what the main screen looks like:
 <img src="screenshot.png">
 
 ```
-# it is fun to program in python
+# it is fun to program in python if you have a nice gui builder
 ```
 First of all, when you run the screen builder (the exe version) it works without any Kivy dependencies.
 But, when you want to start coding to access the screen and widgets, you need to install Kivy.
