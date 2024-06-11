@@ -1,5 +1,3 @@
-# (C) copyright Janotech, LLC - 2024, ...
-
 import math
 import ctypes
 
