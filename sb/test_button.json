@@ -1,0 +1,16 @@
+[
+    {
+        "name": "button1",
+        "type": "Button",
+        "x": 40.0,
+        "y": 40.0,
+        "size": "[380.0, 360.0]",
+        "text": "",
+        "font_size": "30",
+        "font_name": "Roboto",
+        "color": "[1, 1, 1, 1]",
+        "background_color": "[0.8, 0, 0.4, 0.8]",
+        "image": "checkmark.png",
+        "background_normal": ""
+    }
+]

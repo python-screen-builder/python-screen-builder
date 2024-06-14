@@ -1,0 +1,106 @@
+[
+    {
+        "name": "",
+        "type": "Panel",
+        "x": 40.0,
+        "y": 620.0,
+        "size": "[1160.0, 280.0]",
+        "text": "",
+        "halign": "left",
+        "valign": "top",
+        "font_size": "30.0",
+        "font_name": "Roboto",
+        "background_color": "(0.4, 0.4, 0.4)",
+        "radius": "((20, 20), (20, 20), (20, 20), (20, 20))"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 40,
+        "y": 140.0,
+        "size": "[200, 200]",
+        "text": "reverb"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 240.0,
+        "y": 140.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 440.0,
+        "y": 140.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 640.0,
+        "y": 140.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 40.0,
+        "y": 360.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 240.0,
+        "y": 360.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 440.0,
+        "y": 360.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "",
+        "type": "Knob",
+        "x": 640.0,
+        "y": 360.0,
+        "size": "[200, 200]",
+        "text": "knob"
+    },
+    {
+        "name": "slider1",
+        "type": "Slider",
+        "x": 880.0,
+        "y": 160.0,
+        "size": "[100, 400.0]",
+        "text": "slider",
+        "orientation": "vertical"
+    },
+    {
+        "name": "slider3",
+        "type": "Slider",
+        "x": 1040.0,
+        "y": 160.0,
+        "size": "[100, 400.0]",
+        "text": "slider",
+        "orientation": "vertical"
+    },
+    {
+        "name": "",
+        "type": "PianoKeyboard",
+        "x": 80.0,
+        "y": 700.0,
+        "size": "[1080.0, 180.0]",
+        "keyboard_size": "30"
+    }
+]
