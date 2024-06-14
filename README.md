@@ -3,7 +3,7 @@
 ## Welcome to the Python GUI Screen Builder project.
 
 The Python screen builder is an easy to use tool you can use to create and load a screen for an application.
-The GUI it uses is Kivy, but don't worry - the screen builder makes it easy and fun to use.
+The GUI it uses is Kivy and the screen builder makes it easy and fun to use.
 This is what the main screen looks like:
 
 <img src="screenshot.png">
@@ -11,13 +11,12 @@ This is what the main screen looks like:
 ```
 # it is fun to program in python if you have a nice gui builder
 ```
-First of all, when you run the screen builder (the exe version) it works without any Kivy dependencies.
-But, when you want to start coding to access the screen and widgets, you need to install Kivy.
-It's easy, Kivy is simple to install. You can find out how to install Kivy here:
+First of all, you need to install Kivy to run the screen builder.
+You can find out how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
 
 Basically it boils down to installing the Kivy framework and its dependencies: angle, glew, sdl2.
-For example on Windows:
+For example, on Windows:
 ```
 python -m pip install "kivy[base]" kivy_examples
 ```
