@@ -28,8 +28,8 @@ The sb_test folder contains the test application which you can be used as a temp
 
 When you run the screen builder you can select from an array of GUI widgets on the sidebar.
 Select a Button control for instance, change its text, font, etc. Then File -> Export -> your_screen.json to save.
-The json file contains all the information about the GUI controls you selected. Also make sure the name field is filled in.
-It should automagically default to button1. That is how you reference controls it in your Python application.
+The json file contains all the information about the button control you selected. Also make sure the name field is filled in.
+It should automagically default to button1 for buttons. That is how you reference controls in your Python application.
 
 Here is the sample code for a working application that uses the screen file test_button.json
 ```
