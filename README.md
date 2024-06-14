@@ -18,13 +18,13 @@ You can find out how to install Kivy here:
 
 ## How to use
 
-You can download all of the Python files from the sb folder to a separate location. Then simply type:
+You can download all of the Python files from the sb folder to a separate location. Then, simply type:
 
 ```
 py main.py
 ```
-The screen builder main window should appear. You can then start to build json screens to be used with the GUI.
-The sb_test folder contains the test application.
+The screen builder main window should appear. You can then start to building screens to be used with the GUI.
+The sb_test folder contains the test application which you can be used as a template.
 
 When you run the screen builder you can select from an array of GUI widgets on the sidebar.
 Select a Button control for instance, change its text, font, etc. Then File -> Export -> your_screen.json to save.
