@@ -23,7 +23,7 @@ You can download all of the Python files from the sb folder to a separate locati
 ```
 py main.py
 ```
-The screen builder main window should appear. You can then start to building screens to be used with the GUI.
+The screen builder main window should appear. You can then start building screens to be used with the GUI.
 The sb_test folder contains the test application which you can be used as a template.
 
 When you run the screen builder you can select from an array of GUI widgets on the sidebar.
