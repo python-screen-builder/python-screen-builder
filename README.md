@@ -12,14 +12,10 @@ This is what the main screen looks like:
 # it is fun to program in python if you have a nice gui builder
 ```
 First of all, you will need to install the Kivy framework in order to run the screen builder.
+
 You can find out how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
 
-Basically it boils down to installing the Kivy framework and its dependencies: angle, glew, sdl2.
-For example, on Windows:
-```
-python -m pip install "kivy[base]" kivy_examples
-```
 ## How to use
 
 You can download all of the Python files from the sb folder to a separate location. Then simply type:
