@@ -11,7 +11,7 @@ This is what the main screen looks like:
 ```
 # it is fun to program in python if you have a nice gui builder
 ```
-First of all, you need to install Kivy to run the screen builder.
+First of all, you will need to install the Kivy framework in order to run the screen builder.
 You can find out how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
 
