@@ -21,7 +21,7 @@ You can find out how to install Kivy here:
 You can download all of the Python files from the sb folder to a separate location. Then, simply type:
 
 ```
-py main.py
+python main.py
 ```
 The screen builder main window should appear. You can then start building screens to be used with the GUI.
 The sb_test folder contains the test application which you can be used as a template.
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 ```
 If everything is working, when you run the test program:
 ```
-py test_app.py
+python test_app.py
 ```
 You should see a screen like this:
 
