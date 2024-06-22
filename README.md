@@ -71,7 +71,7 @@ You should see a screen like this:
 
 And then when you click on the button it should say something in the console window.
 
-That's it, simple and easy to use. More to come, stay tuned ... 😉
+That's it, simple and easy to use. More to come, stay tuned. 😉
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
