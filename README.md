@@ -81,20 +81,20 @@ And then when you click on the button it should say something in the console win
 
 That's it, simple and easy to use. 😉
 
-## Change Log - what is fixed, new in version 2.0:
+## Change Log - what is fixed in version 2.0:
 
 - Button image text can now be set back to empty string
 - Sometimes could not delete widget after changing some properties
 - added try-except for bad int values and int to type_name list
-- added start=midi_key_number option to piano keyboard widget
 - added set_init_pos function to reset initial position of widgets
 - made radius (0, 0, 0, 0), not None for all widgets that use this property
 
 ## Enhancements in 2.0
 - added a WidgetContainer class to replace the WidgetScreen class
 - added a WidgetScreen class that subclasses directly from the Kivy Screen class
-- added a button_normal_color and button_down_color for Button and Toggle widgets that use radius or border_width
-- this allows the screen to contain both standard Kivy button functionality and rounded buttons with colors
+- added a button_normal_color and button_down_color for Button and Toggle widgets
+- added rounded buttons to screen builder
+- added start option to piano keyboard
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
