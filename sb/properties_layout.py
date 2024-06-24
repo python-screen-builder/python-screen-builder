@@ -4,7 +4,7 @@ from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.stacklayout import StackLayout
-from gui import Screen, Menu, SubMenu, MenuButton, Popup, Label, ListBox
+from gui import Screen, Menu, SubMenu, MenuButton, Popup, Label, ListBox, Button, CheckButton
 from os.path import exists
 
 class Property():
@@ -18,7 +18,10 @@ class Property():
         self.label = Label(text = self.name, font_size = self.font_size, size_hint = (1, None), size = (0, 30))
         self.input = eval(self.init)
         self.input.size_hint = (1, None)
-        self.input.bind(text = self.on_change) # , focus = self.on_focus)
+        try:
+            self.input.bind(text = self.on_change) # , focus = self.on_focus)
+        except:
+            pass
         # try and set focus for text input so keys like delete will not delete the widget
         # this way the keystrokes will be directed to the text input only
         try:
@@ -102,6 +105,9 @@ class PropertiesLayout(StackLayout):
             if name == "image":
                 # if name is valid image file
                 if exists(value): self.set_widget_image(widget, value)
+                if value == '':
+                    if widget.image != None: widget.remove_widget(widget.image)
+                    widget.image = None
                 return
             if name == "background_normal":
                 if value == '': widget.background_normal = ''; return
@@ -119,9 +125,29 @@ class PropertiesLayout(StackLayout):
                 except:
                     pass
                 return
+            if name == "button_normal_color":
+                #if value == '': widget.background_down = ''; return
+                try:
+                    if eval(value) == widget.button_normal_color: return
+                    setattr(widget, name, eval(value))
+                    widget.draw_color = widget.button_normal_color
+                    widget.update_handler()
+                except:
+                    pass
+                return
+            if name == "button_down_color":
+                #if value == '': widget.background_down = ''; return
+                try:
+                    if eval(value) == widget.button_down_color: return
+                    setattr(widget, name, eval(value))
+                    widget.draw_color = widget.button_down_color
+                    widget.update_handler()
+                except:
+                    pass
+                return
             attr_value = getattr(widget, name)
             type_name = type(attr_value).__name__
-            if type_name in [ 'ObservableReferenceList', 'ObservableList', 'tuple', 'list' ]:
+            if type_name in [ 'ObservableReferenceList', 'ObservableList', 'tuple', 'list', 'int' ]:
                 try:
                     setattr(widget, name, eval(value)) # ; return
                     widget.update_handler(); return # setattr(widget, name, eval(value)); return
@@ -129,7 +155,10 @@ class PropertiesLayout(StackLayout):
                     return
             if type_name in [ 'str' ]:
                 setattr(widget, name, value); return
-            setattr(widget, name, eval(type_name + '(' + value + ')'))
+            try:
+                setattr(widget, name, eval(type_name + '(' + value + ')'))
+            except:
+                pass
             #widget.update_handler()
 
     def get_int(self, text):

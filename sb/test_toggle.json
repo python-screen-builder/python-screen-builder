@@ -9,6 +9,9 @@
         "font_size": "30",
         "font_name": "Roboto",
         "color": "[1, 1, 1, 1]",
-        "background_color": "[0, 0, 0, 0]"
+        "background_color": "[1, 1, 1, 1.0]",
+        "radius": "(0, 0, 0, 0)",
+        "border_width": "0",
+        "border_color": "(1, 1, 1, 0.5)"
     }
 ]

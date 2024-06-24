@@ -20,7 +20,7 @@ Config.set('input', 'mouse', 'mouse, multitouch_on_demand')
 
 class Main(App):
 
-    version = "1.0"
+    version = "2.0"
 
     keyboard = Window.request_keyboard(None, None, 'text')
     focus = True
@@ -59,7 +59,7 @@ class Main(App):
         self.properties_layout.bind(minimum_height = self.properties_layout.setter('height'))
 
         widgets_splitter = Splitter(sizable_from = "right", size_hint = (.3, 1), strip_size = self.settings.strip_size)
-        props_splitter = Splitter(sizable_from = "left", size_hint = (.3, 1), strip_size = self.settings.strip_size)
+        props_splitter = Splitter(sizable_from = "left", size_hint = (.6, 1), strip_size = self.settings.strip_size)
         
         self.build_widgets_panel()
 

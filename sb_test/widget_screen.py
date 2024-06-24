@@ -1,16 +1,18 @@
 import json
 
 from kivy.uix.image import Image
+from kivy.uix.screenmanager import Screen
 from os.path import exists
 from gui import *
 
-class WidgetScreen:
+class WidgetScreen(Screen):
 
     def __init__(self, **kwargs):
-        self.screen = kwargs.get('screen')
-        self.file_name = kwargs.get('file_name')
+        self.file_name = kwargs.pop('file_name')
+        self.menu_height = kwargs.pop('menu_height', 0)
+        super(WidgetScreen, self).__init__(**kwargs)
+        #self.screen = kwargs.get('screen')
         self.widgets = []
-        pass
 
     def add_widget_from_dict(self, dict):
         try: name = dict['name']
@@ -26,7 +28,7 @@ class WidgetScreen:
                 instance._x = dict[prop]
                 continue
             if prop == 'y':
-                instance._y = dict[prop]
+                instance._y = dict[prop] + self.menu_height
                 continue
             if type == 'Slider' and prop == 'text':
                 setattr(instance.name_label, prop, dict[prop])
@@ -55,7 +57,8 @@ class WidgetScreen:
                     setattr(instance, prop, value)
         self.widgets.append(instance)
         if len(name) > 0: exec('self.' + name + ' = instance')
-        exec('self.screen.add_widget(instance)')
+        #exec('self.screen.add_widget(instance)')
+        self.add_widget(instance)
 
     def build_widgets_screen(self):
         for dict in self.json_widgets:

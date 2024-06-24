@@ -1,5 +1,5 @@
 {
-    "window_width": 800,
+    "window_width": 1000,
     "window_height": 600,
     "windows_dpi_awareness": 2,
     "background_color": "grey",
@@ -62,6 +62,14 @@
                 },
                 {
                     "name": "radius",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_width",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_color",
                     "init": "TextInput()"
                 }
             ]
@@ -146,6 +154,26 @@
                 {
                     "name": "background_normal",
                     "init": "TextInput()"
+                },
+                {
+                    "name": "radius",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "button_normal_color",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "button_down_color",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_width",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_color",
+                    "init": "TextInput()"
                 }
             ]
         },
@@ -180,6 +208,26 @@
                 },
                 {
                     "name": "size",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "radius",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "button_normal_color",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "button_down_color",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_width",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "border_color",
                     "init": "TextInput()"
                 }
             ]
@@ -300,6 +348,10 @@
                 },
                 {
                     "name": "keyboard_size",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "start",
                     "init": "TextInput()"
                 }
             ]

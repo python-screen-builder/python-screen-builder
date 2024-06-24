@@ -1,0 +1,79 @@
+[
+    {
+        "name": "",
+        "type": "Panel",
+        "x": 40.0,
+        "y": 620.0,
+        "size": "[1160.0, 280.0]",
+        "text": "",
+        "halign": "left",
+        "valign": "top",
+        "font_size": "30.0",
+        "font_name": "Roboto",
+        "background_color": "(0.4, 0.4, 0.4)",
+        "radius": "((20, 20), (20, 20), (20, 20), (20, 20))",
+        "border_width": "0",
+        "border_color": "(1, 1, 1, 1)"
+    },
+    {
+        "name": "list",
+        "type": "ListBox",
+        "x": 800.0,
+        "y": 120.0,
+        "size": "[320.0, 80.0]",
+        "text": "List",
+        "font_size": "30.0",
+        "font_name": "Roboto"
+    },
+    {
+        "name": "slider",
+        "type": "Slider",
+        "x": 120.0,
+        "y": 320.0,
+        "size": "[500.0, 180.0]",
+        "text": "slider",
+        "orientation": "horizontal"
+    },
+    {
+        "name": "piano",
+        "type": "PianoKeyboard",
+        "x": 80.0,
+        "y": 700.0,
+        "size": "[1080.0, 180.0]",
+        "keyboard_size": "30",
+        "start": "0"
+    },
+    {
+        "name": "toggle1",
+        "type": "ToggleButton",
+        "x": 900.0,
+        "y": 280.0,
+        "size": "[120.0, 120.0]",
+        "text": "Tog",
+        "font_size": "50",
+        "font_name": "LCD",
+        "color": "[1, 1, 1, 1]",
+        "background_color": "[0, 0, 0, 0]",
+        "radius": "(60, 60, 60, 60)",
+        "button_normal_color": "(0.3, 0.3, 0.3, 1)",
+        "button_down_color": "(0.1, 0.5, 0.8, 1)",
+        "border_width": "0",
+        "border_color": "(1, 1, 1, 0.5)"
+    },
+    {
+        "name": "knob1",
+        "type": "Knob",
+        "x": 120.0,
+        "y": 80.0,
+        "size": "[200, 200]",
+        "text": "knob #1"
+    },
+    {
+        "name": "knob2",
+        "type": "Knob",
+        "x": 400.0,
+        "y": 80.0,
+        "size": "[200, 200]",
+        "text": "knob #2"
+    }
+]

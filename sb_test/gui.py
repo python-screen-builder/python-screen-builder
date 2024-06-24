@@ -1,5 +1,3 @@
-# (C) copyright Janotech, LLC - 2024, ...
-
 import math
 import ctypes
 
@@ -26,7 +24,7 @@ from kivy.uix.dropdown import DropDown as _DropDown
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.popup import Popup
 from kivy.graphics import Color, Line, Rectangle, RoundedRectangle, Rotate, PushMatrix, PopMatrix, Ellipse
-from kivy.properties import NumericProperty, BoundedNumericProperty
+from kivy.properties import NumericProperty, BoundedNumericProperty, ListProperty
 
 class UserInterface:
 
@@ -118,7 +116,7 @@ class Panel(_Label):
         self.halign = 'left'
         self.padding = 30
         self.background_color = kwargs.pop('background_color', Window.clearcolor)
-        self.radius = kwargs.pop('radius', [(20, 20), (20, 20), (20, 20), (20, 20)])
+        self.radius = kwargs.pop('radius', (20, 20, 20, 20))
         super(Panel, self).__init__(**kwargs)
         self.set_pos()
         self.bind(pos = self.update_handler, size = self.update_handler)
@@ -279,11 +277,10 @@ class TextInput(_TextInput):
         super(TextInput, self).__init__(**kwargs)
         #self.valign = kwargs.pop('valign', 'center')
         self.halign = kwargs.pop('halign', 'left')
-
         self.set_pos()
         self.bind(pos = self.update_handler, size = self.update_handler)
 
-    def update_handler(self, instance, value):
+    def update_handler(self, instance = None, value = None):
         self.set_pos()
 
     def set_pos(self):
@@ -295,21 +292,27 @@ class Button(_Button):
     default_size = (200, 200)
     default_font_size = 40
 
+    button_normal_color = ListProperty((0, 0, 0, 0))
+
     def __init__(self, **kwargs):
         self._x = kwargs.pop('x', -1)
         self._y = kwargs.pop('y', -1)
-        self.radius = kwargs.pop('radius', None)#[20, 20, 20, 20])
+        self.radius = kwargs.pop('radius', (0, 0, 0, 0))
+        self.button_normal_color = kwargs.pop('button_normal_color', (.3, .3, .3, 1))
+        self.button_down_color = kwargs.pop('button_down_color', (.1, .5, .8, 1))
         self.border_color = kwargs.pop('border_color', (1, 1, 1, .5))
         self.border_width = kwargs.pop('border_width', 0)
         self.size_hint = (None, None)
         self.size = self.default_size
         self.font_size = self.default_font_size
         self.image = None
-        self.button_color = kwargs.pop('button_color', { 'normal': [.3, .3, .3, 1], 'down': [.1, .3, .8, 1] })
-        self.draw_color = self.button_color['normal']
+        self.draw_color = self.button_normal_color
         super(Button, self).__init__(**kwargs)
         self.set_pos()
         self.bind(pos = self.update_handler, size = self.update_handler)
+
+    def on_button_normal_color(self, instance, value):
+        self.draw_color = self.button_normal_color
 
     def update_handler(self, instance = None, value = None):
         self.set_image_pos()
@@ -317,7 +320,6 @@ class Button(_Button):
 
     def set_pos(self):
         UserInterface.set_pos(self)
-        if self.radius == None: return
         self.draw_button()
 
     def set_image_pos(self):
@@ -328,7 +330,9 @@ class Button(_Button):
         self.image.size = self.size # (self.size[0] / 2, self.size[1] / 2)
 
     def draw_button(self):
-        if self.radius == None: return
+        if self.radius == (0, 0, 0, 0) and self.border_width == 0:
+            self.canvas.before.clear()
+            return
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
@@ -348,11 +352,11 @@ class Button(_Button):
                 Line(width = border_width, rounded_rectangle = rounded_rectangle)
 
     def on_press(self, *args):
-        self.draw_color = self.button_color['down']
+        self.draw_color = self.button_down_color
         self.draw_button()
 
     def on_release(self, *args):
-        self.draw_color = self.button_color['normal']
+        self.draw_color = self.button_normal_color
         self.draw_button()
 
 class ToggleButton(_ToggleButton):
@@ -360,31 +364,38 @@ class ToggleButton(_ToggleButton):
     default_size = (200, 200)
     default_font_size = 40
 
+    button_normal_color = ListProperty((0, 0, 0, 0))
+
     def __init__(self, **kwargs):
         self._x = kwargs.pop('x', -1)
         self._y = kwargs.pop('y', -1)
-        self.radius = kwargs.pop('radius', None)#[20, 20, 20, 20])
+        self.radius = kwargs.pop('radius', (0, 0, 0, 0))
+        self.button_normal_color = kwargs.pop('button_normal_color', (.3, .3, .3, 1))
+        self.button_down_color = kwargs.pop('button_down_color', (.1, .5, .8, 1))
         self.border_color = kwargs.pop('border_color', (1, 1, 1, .5))
         self.border_width = kwargs.pop('border_width', 0)
         self.size_hint = (None, None)
         self.size = self.default_size
         self.font_size = self.default_font_size
-        self.button_color = kwargs.pop('button_color', { 'normal': [.3, .3, .3, 1], 'down': [.1, .3, .8, 1] })
-        self.draw_color = self.button_color['normal']
+        self.draw_color = self.button_normal_color
         super(ToggleButton, self).__init__(**kwargs)
         self.set_pos()
         self.bind(pos = self.update_handler, size = self.update_handler, on_press = self.button_handler)
 
-    def update_handler(self, instance, value):
+    def on_button_normal_color(self, instance, value):
+        self.draw_color = self.button_normal_color
+
+    def update_handler(self, instance = None, value = None):
         self.set_pos()
 
     def set_pos(self):
         UserInterface.set_pos(self)
-        if self.radius == None: return
         self.draw_button()
 
     def draw_button(self):
-        if self.radius == None: return
+        if self.radius == (0, 0, 0, 0) and self.border_width == 0:
+            self.canvas.before.clear()
+            return
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
@@ -404,14 +415,13 @@ class ToggleButton(_ToggleButton):
                 Line(width = border_width, rounded_rectangle = rounded_rectangle)
 
     def button_handler(self, button):
-        if button.state == 'normal': self.draw_color = self.button_color['normal']
-        if button.state == 'down': self.draw_color = self.button_color['down']
+        if button.state == 'normal': self.draw_color = self.button_normal_color
+        if button.state == 'down': self.draw_color = self.button_down_color
         self.draw_button()
-        pass
 
     def on_state(self, button, value):
-        if button.state == 'normal': self.draw_color = self.button_color['normal']
-        if button.state == 'down': self.draw_color = self.button_color['down']
+        if button.state == 'normal': self.draw_color = self.button_normal_color
+        if button.state == 'down': self.draw_color = self.button_down_color
         self.draw_button()
 
 class ProgramButton(ToggleButton):
@@ -877,6 +887,7 @@ class PianoKeyboard(_RelativeLayout):
         self._x = kwargs.pop('x', -1)
         self._y = kwargs.pop('y', -1)
         self.keyboard_size = kwargs.pop('keyboard_size', 57)
+        self.start = kwargs.pop('start', 0)
         self.size_hint = (None, None)
         super(PianoKeyboard, self).__init__(**kwargs)
         self.white_keys = WhiteKeys(self.keyboard_size, **kwargs)
@@ -884,27 +895,30 @@ class PianoKeyboard(_RelativeLayout):
         self.midi_notes = [None] * 128
         self.add_widget(self.white_keys)
         self.add_widget(self.black_keys)
-        note = 0
+        self.init_keyboard()
+
+    def init_keyboard(self):
+        note = self.start
         for index, b in enumerate(self.white_keys.keys):
             self.midi_notes[note] = b
             note += 2
             k = index % 7
             if k == 2 or k == 6:
                 note -= 1
-        note = 0
+        note = self.start
         for index, b in enumerate(self.black_keys.keys):
             if b.opacity == 0:
                 note += 1
                 continue
             self.midi_notes[note + 1] = b            
             note += 2
+        for index, note in enumerate(self.midi_notes):
+            if note == None: self.midi_notes[index] = _Button(disabled = True, opacity = 0)
+            self.midi_notes[index].id = index
         self.set_pos()
         self.white_keys.update_handler(self.white_keys, self.size)
         self.black_keys.update_handler(self.black_keys, self.size)
         self.bind(pos = self.update_handler, size = self.update_handler)
-
-    def update_handler(self, instance, value):
-        self.set_pos()
 
     def on_keyboard_size(self, instance, value):
         if self.keyboard_size < 8: return
@@ -914,6 +928,10 @@ class PianoKeyboard(_RelativeLayout):
         self.black_keys = BlackKeys(self.keyboard_size)
         self.add_widget(self.white_keys)
         self.add_widget(self.black_keys)
+        self.init_keyboard()
+
+    def update_handler(self, instance, value):
+        self.set_pos()
 
     def set_pos(self):
         UserInterface.set_pos(self)

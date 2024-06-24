@@ -9,8 +9,13 @@
         "font_size": "30",
         "font_name": "Roboto",
         "color": "[1, 1, 1, 1]",
-        "background_color": "[0.8, 0, 0.4, 0.8]",
+        "background_color": "[0, 0, 0, 0]",
         "image": "checkmark.png",
-        "background_normal": ""
+        "background_normal": "",
+        "radius": "(20, 20, 20, 20)",
+        "button_normal_color": "[0.3, 0.8, 0.3, 1]",
+        "button_down_color": "(0.1, 0.5, 0.8, 1)",
+        "border_width": "0",
+        "border_color": "(1, 1, 1, 0.5)"
     }
 ]

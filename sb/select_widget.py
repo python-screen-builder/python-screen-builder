@@ -152,6 +152,7 @@ class SelectWidget(Widget):
         class_name = type(self.widget).__name__
         App.get_running_app().build_props_panel(class_name)
         App.get_running_app().init_properties(self, touch.button)
+        App.get_running_app().focus = True
 
         if App.get_running_app().shift == True: return False
         return True # needed to allow widget inside widget to be selected
@@ -203,6 +204,7 @@ class SelectWidget(Widget):
         self.draw_select_box()
 
         App.get_running_app().init_properties(self)
+        App.get_running_app().screen_builder.set_init_pos()
 
         return # True
 

@@ -21,6 +21,9 @@ class ScreenBuilder(_Screen):
         Window.clearcolor = 'grey'
         Window.size = (self.settings.window_width, self.settings.window_height)
         Window.bind(size = self.resize)
+        self.set_init_pos()
+
+    def set_init_pos(self):
         self.x_add = 40
         self.y_add = 140
 
