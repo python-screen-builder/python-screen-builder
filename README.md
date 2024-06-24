@@ -83,8 +83,8 @@ That's it, simple and easy to use. 😉
 
 ## Change Log - what is fixed in version 2.0:
 
-- Button image text can now be set back to empty string
-- Sometimes could not delete widget after changing some properties
+- button image text can now be set back to empty string
+- sometimes could not delete widget after changing some properties
 - added try-except for bad int values and int to type_name list
 - added set_init_pos function to reset initial position of widgets
 - made radius (0, 0, 0, 0), not None for all widgets that use this property
