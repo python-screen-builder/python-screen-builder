@@ -133,7 +133,7 @@ Press ``Del`` to delete the currently selected widget.
 
 You must hold down the ``Ctrl`` key when selecting widgets if using the Edit menu.
 
-## Settings.json
+## Configuration
 The settings.json file can be used to add remove widgets from the sidebar pallet as well as configure other settings.
 
 WARNING: You must be careful however when editing the settings.json file. Make a backup copy first.
