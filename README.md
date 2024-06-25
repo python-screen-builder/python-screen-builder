@@ -1,17 +1,15 @@
 ## Hi there 👋 pythonistas and GUI enthusiasts.
 The Python screen builder is an easy to use tool you can use to create and load a screen for an application.
-
 The GUI it uses is Kivy and the screen builder makes it easy and fun to use.
 
 ## Welcome to version 2.0 of the Python GUI Screen Builder project.
 
-## New version 2.0 update - Please read this if you are using version 1.0
+### Please read if you are using version 1.0
 
 The version 2.0 of the WidgetScreen class is now subclassed directly from the Kivy Screen class.
-Please see the example test application below.
-
 There is also a new WidgetContainer class that works like the previous WidgetScreen class.
 So, if you have a version 1.0 application, just change the WidgetScreen references to use WidgetContainer.
+Please see the example test application below.
 
 ## Running the screen builder application
 
