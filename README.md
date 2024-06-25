@@ -117,23 +117,23 @@ if __name__ == '__main__':
 # Documentation
 
 ## Screen Builder Keyboard and Mouse Commands
-Left click on a widget to bring it to the foreground.
+Left click a widget to bring it to the foreground.
 
-Right click on a widget to see what's behind the current one. This is good for when you have a panel containing widgets.
+Right click a widget to see what's behind the current one.
 
-Hold down Ctrl and keep clicking objects to select multiple and then move them by keeping Ctrl pressed.
+Hold down ``Ctrl`` and keep clicking objects to select multiple and then move them by keeping ``Ctrl`` pressed.
 
-Hold down the shift key and then click to select a widget behind another widget.
+Hold down ``Shift`` and then click to select a widget behind another widget.
 
-Press Del to delete the currently selected widget.
+Press ``Del`` to delete the currently selected widget.
 
-Ctrl + A to select all screen widgets. Keep Ctrl down to move all objects around in the screen builder window.
+``Ctrl + A`` to select all screen widgets. Keep ``Ctrl`` down to move all objects around in the screen builder window.
 
-Ctrl + C to copy a selected widget.
+``Ctrl + C`` to copy a selected widget.
 
-Ctrl + V to paste a copied widget into screen builder window.
+``Ctrl + V`` to paste a copied widget into screen builder window.
 
-You must hold down Ctrl when selecting widgets if using the Edit menu.
+You must hold down the ``Ctrl`` key when selecting widgets if using the Edit menu.
 
 ## Settings.json
 The settings.json file can be used to add remove widgets from the sidebar pallet as well as configure other settings.
