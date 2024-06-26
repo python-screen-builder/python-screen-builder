@@ -160,6 +160,7 @@ class Main(App):
         for widget in self.settings.widgets:
             if widget['class'] == widget_type:
                 for prop in widget['properties']:
+                    if 'save' in prop and prop['save'] == False: continue
                     prop_names.append(prop['name'])
                 return prop_names
 

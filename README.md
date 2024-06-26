@@ -138,7 +138,7 @@ The settings.json file can be used to add remove widgets from the sidebar pallet
 
 WARNING: You must be careful however when editing the settings.json file. Make a backup copy first.
 
-Hints: to run the screen builder on Linux make sure you set: 
+Hints: to run the screen builder on Linux distros make sure you set: 
 
 ```
 windows_dpi_awarensess: null,
@@ -167,6 +167,7 @@ b = Button(x = 100, y = 100, text = "Button")
 - added a button_normal_color and button_down_color for Button and Toggle widgets
 - added rounded buttons to screen builder
 - added start option to piano keyboard
+- added save option to settings.json widget properties
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
