@@ -1,0 +1,51 @@
+[
+    {
+        "name": "panel",
+        "type": "Panel",
+        "x": 160.0,
+        "y": 100.0,
+        "size": "[1020.0, 860.0]",
+        "text": "Lucky Square - can you find the lucky square before the clock runs out? Click away!",
+        "halign": "left",
+        "valign": "top",
+        "font_size": "40.0",
+        "font_name": "Roboto",
+        "background_color": "(0.4, 0.1, 0.4)",
+        "radius": "(20, 20, 20, 20)",
+        "border_width": "0",
+        "border_color": "(1, 1, 1, 1)"
+    },
+    {
+        "name": "stack",
+        "type": "StackLayout",
+        "x": 320.0,
+        "y": 400.0,
+        "size": "[680.0, 460.0]"
+    },
+    {
+        "name": "clock",
+        "type": "Label",
+        "x": 400.0,
+        "y": 260.0,
+        "size": "[360.0, 100]",
+        "text": "Time   Left:",
+        "halign": "center",
+        "valign": "center",
+        "font_size": "90.0",
+        "font_name": "LCD",
+        "color": "[1, 1, 1, 1]"
+    },
+    {
+        "name": "clock",
+        "type": "Label",
+        "x": 760.0,
+        "y": 260.0,
+        "size": "[100, 100]",
+        "text": "",
+        "halign": "left",
+        "valign": "center",
+        "font_size": "90.0",
+        "font_name": "LCD",
+        "color": "[1, 1, 1, 1]"
+    }
+]

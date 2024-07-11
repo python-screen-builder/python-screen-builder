@@ -357,6 +357,21 @@
             ]
         },
         {
+            "name": "StackLayout",
+            "class": "StackLayout",
+            "init": "StackLayout()",
+            "properties": [
+                {
+                    "name": "name",
+                    "init": "TextInput()"
+                },
+                {
+                    "name": "size",
+                    "init": "TextInput()"
+                }
+            ]
+        },
+        {
             "name": "TestClass",
             "class": "TestClass",
             "init": "TestClass()",
