@@ -355,6 +355,18 @@
                     "init": "TextInput()"
                 }
             ]
+        },
+        {
+            "name": "TestClass",
+            "class": "TestClass",
+            "init": "TestClass()",
+            "file": "test_class",
+            "properties": [
+                {
+                    "name": "name",
+                    "init": "TextInput()"
+                }
+            ]
         }
     ]
 }

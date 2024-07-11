@@ -20,6 +20,7 @@ class WidgetContainer:
         x = dict['x']
         y = dict['y']
         size = dict['size'] # eval(dict['size'])
+        if 'file' in dict: exec("from " + dict['file'] + " import *")
         instance = eval(type)()
         for prop in dict:
             if prop in [ 'name', 'type' ]: continue
@@ -52,7 +53,11 @@ class WidgetContainer:
                 else:
                     if type == "CheckButton": print(dict[prop])
                     value = dict[prop]
-                    if len(value) > 0: value = eval(value)
+                    if len(value) > 0:
+                        try:
+                            value = eval(value)
+                        except:
+                            pass
                     setattr(instance, prop, value)
         self.widgets.append(instance)
         if len(name) > 0: exec('self.' + name + ' = instance')

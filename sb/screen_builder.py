@@ -4,6 +4,7 @@ from kivy.core.window import Window
 from kivy.graphics import *
 from kivy.app import App
 from select_widget import *
+from os.path import exists
 from gui import *
 
 from copy import copy
@@ -16,8 +17,10 @@ class ScreenBuilder(_Screen):
         UserInterface(windows_dpi_awareness = self.settings.windows_dpi_awareness)
         self.widgets = []
         self.widgets_to_copy = []
+        self.external_classes = {}
         self.grid = None
         self.show_grid = False
+        self.undo_count = 0
         Window.clearcolor = 'grey'
         Window.size = (self.settings.window_width, self.settings.window_height)
         Window.bind(size = self.resize)
@@ -45,10 +48,11 @@ class ScreenBuilder(_Screen):
         if len(index) > 0 and len(name) > 0: select_widget.name = name + index
         self.add_widget(select_widget)
         self.widgets.append(select_widget)
-        pass
 
-    def add_widget_by_name(self, class_name, init, name = ''):
+    def add_widget_by_name(self, class_name, init, name = '', file = ''):
         size = (200, 200)
+        if len(file) > 0 and exists(file + '.py'):
+            exec("from " + file + " import *")
         widget = eval(init)
         if hasattr(widget, "font_size"): widget.font_size = 30
         if hasattr(widget, "text"): widget.text = class_name
@@ -66,6 +70,9 @@ class ScreenBuilder(_Screen):
         x = dict['x']
         y = dict['y'] + self.settings.menu_height
         size = dict['size'] # eval(dict['size'])
+        if type in self.external_classes:
+            file = self.external_classes[type]
+            exec("from " + file + " import *")
         instance = eval(type)()
         for prop in dict:
             if prop in [ 'name', 'type', 'x', 'y' ]: continue
@@ -89,7 +96,14 @@ class ScreenBuilder(_Screen):
                     # instance.update_handler()
                 else:
                     value = dict[prop]
-                    if len(value) > 0: value = eval(value)
+                    # allow any property to be set - for added class properties need to fix this somehow
+                    # for instance size will eval('[width, height]') okay but not if just a string ...
+                    # so just add try-except for now
+                    if len(value) > 0:
+                        try:
+                            value = eval(value)
+                        except:
+                            pass
                     setattr(instance, prop, value)
         select_widget = SelectWidget(name = name, x = x, y = y, widget = instance, size = instance.size)
         self.add_widget(select_widget)
@@ -158,7 +172,8 @@ class ScreenBuilder(_Screen):
     def clear_widgets(self):        
         for widget in self.widgets:
             self.remove_widget(widget)
-            self.widgets = []
+        self.widgets = []
+        self.undo_count = 0
 
     def create_copy(self, screen_widget):
         type_name = type(screen_widget).__name__
@@ -189,6 +204,16 @@ class ScreenBuilder(_Screen):
             widget_copy = self.create_copy(widget.widget)
             self.add_gui_widget(widget_copy, x = widget._x, y = widget._y, name = name)
             #self.add_gui_widget(widget_copy, x = widget_copy._x, y = widget_copy._y, name = name)
+            self.undo_count += 1
+
+    def undo(self):
+        if len(self.widgets) == 0: return
+        if self.undo_count == 0: return
+        widget = self.widgets[-1]
+        self.widgets.pop()
+        self.remove_widget(widget.widget)
+        self.remove_widget(widget)
+        self.undo_count -= 1
 
 class Grid(Widget):
 

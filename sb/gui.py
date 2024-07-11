@@ -67,6 +67,7 @@ class ConfirmBox(Popup):
     def __init__(self, **kwargs):
         message = kwargs.pop('message', '')
         self.on_confirm = kwargs.pop('on_confirm', None)
+        self.on_deny = kwargs.pop('on_deny', None)
         self.title = kwargs.get('title', 'Confirm')
         self.size_hint = (None, None)
         self.size = (600, 600)
@@ -81,7 +82,8 @@ class ConfirmBox(Popup):
         super(ConfirmBox, self).__init__(**kwargs)
 
     def on_click(self, button):
-        if button.text == 'Yes': self.on_confirm() 
+        if self.on_confirm != None and button.text == 'Yes': self.on_confirm() 
+        if self.on_deny != None and button.text == 'No': self.on_deny() 
         self.dismiss()
         pass
 

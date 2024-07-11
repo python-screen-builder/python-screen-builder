@@ -52,7 +52,7 @@ class SelectWidget(Widget):
         for index, grip in enumerate(self.grips):
             self.grips[index].pos = self.get_grip_pos(index)
             self.add_widget(grip)
-        Clock.schedule_once(self.dispatch_event, 0)
+        Clock.schedule_once(self.dispatch_event, .2)
 
     def dispatch_event(self, *args):
         touch = MouseMotionEvent(None, 1, self.pos)

@@ -171,12 +171,13 @@ class PropertiesLayout(StackLayout):
         widget.font_name = value
 
     def get_widget_text(self, widget):
-        if "Piano" in str(type(widget)): return ""
+        if "Piano" in str(type(widget)): return ''
         if "Knob" in str(type(widget)):
             return widget.label.text
         elif "Slider" in str(type(widget)):
             return widget.name_label.text
         else:
+            if not hasattr(widget, 'text'): return ''
             return widget.text
 
     def set_properties(self, selected_widget):

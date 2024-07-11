@@ -20,16 +20,20 @@ Config.set('input', 'mouse', 'mouse, multitouch_on_demand')
 
 class Main(App):
 
-    version = "2.0"
+    version = "3.0"
 
     keyboard = Window.request_keyboard(None, None, 'text')
     focus = True
 
     def get_settings(self):
-        with open("settings.json", "r") as file:
-            data = file.read()
+        try:
+            with open("settings.json", "r") as file:
+                data = file.read()
+                dict = json.loads(data)
+        except:
+            data = default_settings
             dict = json.loads(data)
-        
+
         system_settings = Settings(dict)
         return system_settings
 
@@ -40,7 +44,7 @@ class Main(App):
         main_layout = BoxLayout(orientation = "vertical")
         menu = Menu(pos_hint = { 'top': 1 })
         file_menu = SubMenu(text = 'File', values = [ 'Import', 'Export' ])
-        edit_menu = SubMenu(text = 'Edit', values = [ 'Copy', 'Paste', 'Delete' ])
+        edit_menu = SubMenu(text = 'Edit', values = [ 'Undo', 'Copy', 'Paste', 'Delete' ])
         help_menu = SubMenu(text = 'Help', values = [ 'About' ])
         menu.add_item(file_menu)
         menu.add_item(edit_menu)
@@ -88,7 +92,7 @@ class Main(App):
         return main_layout
 
     def on_request_close(self, *largs, **kwargs):
-        if len(self.screen_builder.widgets) == 0: return False
+        if self.screen_builder.undo_count == 0: return False
         confirm = ConfirmBox(title = 'Exit the App', message = 'Are you sure?', on_confirm = self.on_confirm)
         confirm.open()
         return True
@@ -101,11 +105,16 @@ class Main(App):
             button = Button(text = widget['name'], font_size = self.settings.font_size, on_press = self.add_screen_widget)
             button.init = widget['init']
             button.name = widget['name'].lower()
+            button.file = ''
+            if 'file' in widget:
+                class_name = widget['class']
+                button.file = widget['file']
+                self.screen_builder.external_classes[class_name] = button.file
             self.widgets_layout.add_widget(button)
 
     def build_props_panel(self, class_name):
         self.properties_layout.widget_type.font_size = self.settings.font_size
-        self.properties_layout.widget_type.text = class_name
+        self.properties_layout.widget_type.text = "{0} {1}".format(class_name, "Properties")
         for property in self.properties_layout.props:
             self.properties_layout.remove_widget(property.label)
             self.properties_layout.remove_widget(property.input)
@@ -123,10 +132,9 @@ class Main(App):
         if button == 'right': self.screen_builder.send_widget_to_back(selected_widget)
 
     def add_screen_widget(self, button):
-        self.screen_builder.add_widget_by_name(button.text, button.init, button.name)
-        # add props
+        self.screen_builder.add_widget_by_name(button.text, button.init, button.name, button.file)
         self.build_props_panel(button.text)
-        # init props
+        self.screen_builder.undo_count += 1
 
     def remove_screen_widget(self):
         selected_widget = self.screen_builder.get_selected_widget()
@@ -135,6 +143,8 @@ class Main(App):
         widget = selected_widget.widget
         self.screen_builder.remove_widget(widget)
         self.screen_builder.remove_widget(selected_widget)
+        if self.screen_builder.undo_count  == 0: return
+        self.screen_builder.undo_count -= 1
 
     def get_widget_type(self, widget):
         name = type(widget).__name__
@@ -146,14 +156,30 @@ class Main(App):
             #print(dict)
             self.screen_builder.add_widget_from_dict(dict)
 
-    def import_screen(self, button):
+    def import_screen(self, button = None):
+        if self.screen_builder.undo_count > 0: self.ask_save_changes(); return
         filename = fd.askopenfilename(initialdir = '.', filetypes = [( 'json files', '*.json' )])
         if filename == '': return
+        self.screen_builder.clear_widgets()
         json_widgets = []
         with open(filename, 'r') as file:
             data = file.read()
         json_widgets = json.loads(data)
         self.build_widgets_screen(json_widgets)
+
+    def ask_save_changes(self):
+        confirm = ConfirmBox(title = 'Save Changes', message = 'Save current screen?', on_confirm = self.save_changes, on_deny = self.ignore_changes)
+        confirm.open()
+        self.screen_builder.undo_count = 0
+
+    def save_changes(self):
+        self.export_screen()
+        from kivy.clock import Clock
+        Clock.schedule_once(self.import_screen, .1)
+
+    def ignore_changes(self):
+        from kivy.clock import Clock
+        Clock.schedule_once(self.import_screen, .1)
 
     def prop_names(self, widget_type):
         prop_names = []
@@ -164,15 +190,18 @@ class Main(App):
                     prop_names.append(prop['name'])
                 return prop_names
 
-    def export_screen(self, button):
+    def export_screen(self, button = None):
         filename = fd.asksaveasfilename(initialdir = '.', filetypes = [( 'json files', '*.json' )], defaultextension = 'json')
         if filename == '': return
         json_widgets = []
         for select_widget in self.screen_builder.widgets:
             widget = select_widget.widget
+            type = self.get_widget_type(widget)
             dict = {}
             dict['name'] = select_widget.name
-            dict['type'] = self.get_widget_type(widget)
+            dict['type'] = type
+            if type in self.screen_builder.external_classes:
+                dict['file'] = self.screen_builder.external_classes[type]
             dict['x'] = widget.pos[0]
             dict['y'] = Window.height - widget.pos[1] - widget.size[1] - self.settings.menu_height
             dict['size'] = widget.size
@@ -191,6 +220,7 @@ class Main(App):
             json_widgets.append(dict)
         with open(filename, 'w') as file:
             file.write(json.dumps(json_widgets, ensure_ascii = False, indent = 4))
+        self.screen_builder.undo_count = 0
 
     def show_grid(self, button):
         self.screen_builder.toggle_grid()
@@ -204,6 +234,7 @@ class Main(App):
         if button.text == 'Export': self.export_screen(button)
 
     def on_edit(self, button):
+        if button.text == 'Undo': self.screen_builder.undo()
         if button.text == 'Copy': self.screen_builder.copy()
         if button.text == 'Paste': self.screen_builder.paste()
         if button.text == 'Delete': self.remove_screen_widget()
@@ -224,6 +255,8 @@ class Main(App):
             self.screen_builder.copy()
         if keycode[1] == 'v' and self.ctrl == True:
             self.screen_builder.paste()
+        if keycode[1] == 'z' and self.ctrl == True:
+            self.screen_builder.undo()
         if keycode[1] == 'delete':
             self.remove_screen_widget()
         if keycode[1] in ('lctrl', 'rctrl'):
