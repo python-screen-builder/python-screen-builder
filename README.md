@@ -1,11 +1,10 @@
-## Hi there 👋 pythonistas and GUI enthusiasts.
+## Hi there 👋 Pythonistas and GUI enthusiasts.
 The Python screen builder is an easy-to-use tool you can use to create a GUI for your python application.
-
 The screen builder makes using Python and the Kivy framework fun and easy to use.
 
 <img src="screenshot.png">
 
-## Welcome to version 3.0 of the Python GUI Screen Builder project.
+## Welcome to version 3.0 of the Python Screen Builder project.
 
 ### Please read if you are using version 1.0
 ```
@@ -14,61 +13,54 @@ There is also a new WidgetContainer class that works like the previous WidgetScr
 So, if you have a version 1.0 application, just change the WidgetScreen references to use WidgetContainer.
 Please see the example test application below.
 ```
-
 <marquee scrolldelay=20 loop=1>
 # it is fun to program in python if you have a nice gui builder
 </marquee>
 
 ## Requirements
 
-Python of course. The screen builder is written using the latest version of Python.
-
-First of all, you will need to install the Kivy framework in order to run the screen builder.
-
-You can find out how to install Kivy here:
+Python, of course. The screen builder is written completely in the latest version of Python using the Kivy framework.
+You will need to install Kivy in order to run the screen builder and write Python programs that use the screens.
+You can find out more about how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
 
 ## Running the screen builder application
-
-You can download all of the Python files from the sb folder to a separate location. Then, simply type:
+Download all of the Python files from the sb (screen builder) folder to a separate location.
+Then, simply type:
 
 ```
 python main.py
 ```
 The screen builder main window should appear. You can then start building screens for your applicaiton.
-
 The sb_test folder contains a test application (test_app.py) which you can use as a template.
+There are also some other test applications that show how to program widgets and menus.
 
-There are also some other test applications that show how to implement widgets and menus.
-
-You can also compile the screen reader to an executable if you have a python compiler, <a href="https://pyinstaller.org">pyinstaller</a> for instance:
-
+You can also compile the screen bulder to an executable if you use a python compiler, for instance: <a href="https://pyinstaller.org">pyinstaller</a>:
 ```
 pyinstaller -F main.py
 cd dist
 ```
 You should see a file called main.exe which can be renamed for instance to something like sb.exe.
 
-Then you can copy it to the python scripts directory (in Windows might be something like: "/Program files/Python/Scripts")
-
-For example if Python is installed in "/Program files/Python", might be:
+Then, you can copy it to the python scripts directory.
+On Windows that might be something like: "/Program files/Python/Scripts".
 ```
 rename main.exe sb.exe
-copy main.exe "/Program files/Python/Scripts"
+copy sb.exe "/Program files/Python/Scripts"
 ```
-Once the sb.exe is accessible via the path variable, you can run it from anywhere.
+Once the sb.exe is accessible via the system path, you can run the screen builder tool from anywhere.
 
 Note in version 3.0, a version of the settings.json file is included in the program itself.
-So, you only need to copy the settings.json file if you are using a custom settings file.
+So, you only need to copy the settings.json file if you want modify settings.
 
 ## How to use
-
-When you run the screen builder you can select from an array of GUI widgets on the left sidebar.
-For instance, click Button to create a new button widget which will then appear on the screen.
+When you run the screen builder you can select from an array of widgets on the left sidebar.
+Click Button for example to create a new button widget which will then appear on the screen.
 In the properties window on the right you can change the properties of the widget.
-Change its text, font, etc. Then File -> Export -> your_screen.json to save.
-The json file contains all the information about the button control you selected. Also make sure the name field is filled in.
-It should automagically default to button1 for buttons. That is how you reference controls in your Python application.
+Change its text, font, name, etc. Then File -> Export -> your_screen.json to save the screen as a JSON file.
+The JSON screen file contains all the information about the controls on the screen.
+Make sure the name field is filled in, which is how you can access the variable that corresponds to the screen widget.
+It should automagically generate a default name, button1 for buttons, etc.
 
 Here is the sample code for a working application that uses the screen file test_button.json
 ```
@@ -103,7 +95,7 @@ You should see a screen like this:
 
 <img src="screenshot2.png">
 
-And then when you click on the button it should say something in the console window.
+Then, when you click on the button it should say something in the console window.
 
 That's it, simple and easy to use. 😉
 
@@ -142,23 +134,23 @@ Left click a widget to bring it to the foreground.
 
 Right click a widget to see what's behind the current one.
 
-Note if a widget is covering another widget, you may need to hold down ``Ctrl`` and then left click to bring it to the front.
+Note if a widget is covering another widget, you may also need to hold down ``Ctrl`` and then left click it to bring it to the foreground.
 
-Hold down ``Ctrl`` and keep clicking objects to select multiple and then move them by keeping ``Ctrl`` pressed.
+Hold down ``Ctrl`` to select multiple and then move them by using the mouse and keeping ``Ctrl`` pressed.
 
-Hold down ``Shift`` and then click to select a widget behind another widget.
+Hold down ``Shift`` and then left click to select a widget from behind another widget.
 
 Press ``Del`` to delete the currently selected widget.
 
-``Ctrl + A`` to select all screen widgets. Keep ``Ctrl`` down to move all objects around in the screen builder window.
+``Ctrl + A`` to select all screen widgets. Keep ``Ctrl`` pressed to move all objects around in the screen builder window.
 
 ``Ctrl + C`` to copy a selected widget.
 
-``Ctrl + V`` to paste a copied widget into screen builder window.
+``Ctrl + V`` to paste a copied widget into the screen builder window.
 
 ``Ctrl + Z`` to undo adding of the current widget.
 
-You must hold down the ``Ctrl`` key when selecting widgets if using the Edit menu.
+You must currently hold down the ``Ctrl`` key when selecting widgets when using the ``Edit`` menu.
 
 ## Building an application
 
@@ -194,7 +186,7 @@ class TestApp(App):
 if __name__ == '__main__':
     TestApp().run()
 ```
-Notice that that it contains a screen element that needs to point to the Kivy Screen class instance.
+Notice that it contains a screen element that needs to point to the Kivy Screen class instance.
 
 Both classes contain a load_screen() function that simply builds the screen from the json screen file_name parameter.
 
@@ -202,22 +194,20 @@ There is also a menu_height parameter you can set to the height of the applicati
 
 For example: ```test_screen = TestScreen(file_name = 'test_button.json', screen = screen, menu_height = 100)```
 
-## Widget API (gui.py)
+This sets the menu height to 100 pixels so that the screen widgets will not appear on top of the menu itself.
 
-The widgets that come with the screen builder are configured to be used programatically and accept all Kivy parameters.
-When creating a widget programmatically, for instance, you can use x and y to position it relative to the screen upper left corner:
-This enhancement gives the ability to write a more traditionally oriented application similar to existing programming frameworks.
-
-```
-b = Button(x = 100, y = 100, text = "Button")
-```
-
-The following is a list of some of the widgets available and how to use them to handle events.
-
+## Widget API (included in file gui.py)
 To include all of the widgets to be used in the application simply use:
 ```
 from gui import *
 ```
+The widgets that come with the screen builder are configured to be used programatically and accept all regular Kivy parameters.
+When creating a widget programmatically, you can now use x and y to position it relative to the screen upper left corner:
+This enhancement gives the ability to write a more traditionally-oriented application similar to existing frameworks.
+```
+b = Button(x = 100, y = 100, text = "Button")
+```
+
 ### Button Class
 ```
 class Button(x = value, y = value, radius = (r1, r2, r3, r4), button_normal_color = (r, g, b, a), button_down_color = (r, g, b, a), . . .)
@@ -244,9 +234,9 @@ class ToggleButton(x = value, y = value, radius = (r1, r2, r3, r4), button_norma
 Example callback function using ToggleButton:
 
 ```
-button = ToggleButton(x = 100, y = 100, on_press = toggle)
+button = ToggleButton(x = 100, y = 100, on_press = handle_toggle)
 
-def toggle(self, instance):
+def handle_toggle(self, instance):
     if instance.state == 'down': pass # do something if button state is down
     if instance.state == 'normal: pass # do something if button state is up
 ```    
@@ -266,9 +256,9 @@ class Panel(x = value, y = value, . . .)
 class ListBox(x = value, y = value, . . .)
 ```
 
-To initialize the list box drop down list:
+To initialize a list box:
 ```
-list_box = ListBox(x = 100, y = 100, text = "apple")
+list_box = ListBox(x = 100, y = 100, text = "apple") # set the initial item to be apple
 list_box.values = [ "apple", "peaches", "pumpkin", "pie" ]
 ```
 
@@ -279,7 +269,7 @@ list_box.bind(value = self.on_select)
 .
 .
 def on_select(self, instance, value):
-    print(value) # will print value
+    print(value) # will print text of item selected
 ```
 
 ### Slider Class
@@ -330,7 +320,7 @@ Hints: to run the screen builder on Linux distros make sure to set:
 ```
 windows_dpi_awarensess: null
 ```
-This will allow the Linux version to not try to make a Windows graphics initialization call.
+This will allow the Linux version to not make any Windows graphics initialization calls.
 
 ## Change Log - what is fixed in version 2.0:
 - button image text can now be set back to empty string
