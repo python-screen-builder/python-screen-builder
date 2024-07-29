@@ -4,7 +4,7 @@ The screen builder makes using Python and the Kivy framework fun and easy to use
 
 <img src="screenshot.png">
 
-## Welcome to version 3.0 of the Python Screen Builder project.
+## Welcome to version 4.0 of the Python Screen Builder project.
 
 ### Please read if you are using version 1.0
 ```
@@ -310,6 +310,44 @@ def on_knob(self, instance, value):
     print(value) # will print knob control value
 ```
 
+### Text Input Class
+```
+class TextInput(x = value, y = value, . . .)
+```
+To set the initial value:
+```
+text_input.text = 'hello there'
+```
+
+To add a callback to a text input widget:
+
+```
+text_input.bind(text = self.on_change)
+.
+.
+def on_change(self, instance, value):
+    print(value) # will print the current text value
+```
+
+### Switch Class
+```
+class Switch(x = value, y = value, . . .)
+```
+To set the initial value:
+```
+switch.active = True
+```
+
+To add a callback to a switch widget:
+
+```
+switch.bind(active = self.on_switch)
+.
+.
+def on_switch(self, instance, value):
+    print(value) # will print the current switch state
+```
+
 ## Configuration
 The settings.json file can be used to add or remove widgets from the sidebar pallet as well as configure other settings.
 
@@ -348,6 +386,13 @@ This will allow the Linux version to not make any Windows graphics initializatio
 - added undo for new widgets
 - added default_settings so screen builder can run without settings.json file
 - added ability to use external class files in settings.json
+
+## Version 4.0 Changes
+- fixed path to allow exe version to look in current directory
+- fixed list box options size to be same as list box size
+- fixed radius input check for button and toggle button
+- fixed layout padding for screen builder window
+- added switch and text input widgets to pallet 
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

@@ -21,8 +21,7 @@ default_settings = \
     "menu_height": 100,
     "fonts": [
         "Arial",
-        "Roboto",
-        "LCD"
+        "Roboto"
     ],
     "font_sizes": [
         "20",
@@ -343,28 +342,27 @@ default_settings = \
             ]
         },
         {
-            "name": "Piano",
-            "class": "PianoKeyboard",
-            "init": "PianoKeyboard(keyboard_size = 30, size = (900, 100))",
+            "name": "Text",
+            "class": "TextInput",
+            "init": "TextInput()",
             "properties": [
                 {
                     "name": "name",
                     "init": "TextInput()"
-                },
+                }
+            ]
+        },
+        {
+            "name": "Switch",
+            "class": "Switch",
+            "init": "Switch()",
+            "properties": [
                 {
-                    "name": "size",
-                    "init": "TextInput()"
-                },
-                {
-                    "name": "keyboard_size",
-                    "init": "TextInput()"
-                },
-                {
-                    "name": "start",
+                    "name": "name",
                     "init": "TextInput()"
                 }
             ]
         }
     ]
 }
-"""            
+"""

@@ -71,7 +71,6 @@ class ConfirmBox(Popup):
         self.title = kwargs.get('title', 'Confirm')
         self.size_hint = (None, None)
         self.size = (600, 600)
-        self.title_size = 20
         self.layout = BoxLayout(orientation = 'vertical')
         self.layout.add_widget(_Label(text = message, font_size = 30))
         self.button_layout = BoxLayout(orientation = 'horizontal')
@@ -289,6 +288,27 @@ class TextInput(_TextInput):
         UserInterface.set_pos(self)
         self.text_size = (self.size[0], self.size[1])
 
+class Switch(_Switch):
+
+    default_size = (300, 100)
+    default_font_size = 30
+
+    def __init__(self, **kwargs):
+        self._x = kwargs.pop('x', -1)
+        self._y = kwargs.pop('y', -1)
+        self.size_hint = (None, None)
+        kwargs['size'] = self.default_size
+        self.font_size = self.default_font_size
+        super(Switch, self).__init__(**kwargs)
+        self.set_pos()
+        self.bind(pos = self.update_handler, size = self.update_handler)
+
+    def update_handler(self, instance = None, value = None):
+        self.set_pos()
+
+    def set_pos(self):
+        UserInterface.set_pos(self)
+
 class Button(_Button):
 
     default_size = (200, 200)
@@ -338,6 +358,8 @@ class Button(_Button):
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
+        if type(self.radius) not in [list, tuple]: return
+        if len(self.radius) < 4: return
         self.background_normal = ''
         self.background_down = ''
         self.background_color = (0, 0, 0, 0)
@@ -401,6 +423,8 @@ class ToggleButton(_ToggleButton):
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
+        if type(self.radius) not in [list, tuple]: return
+        if len(self.radius) < 4: return
         self.background_normal = ''
         self.background_down = ''
         self.background_color = (0, 0, 0, 0)
@@ -538,7 +562,7 @@ class ListBoxOption(SpinnerOption):
         self.size_hint = (None, None)
         self.font_size = self.default_font_size
         self.size = self.default_size
-        self.text_size = (self.text_width, None)
+        #self.text_size = (self.text_width, None)
         self.halign = 'left'
         self.padding = 20
         super(ListBoxOption, self).__init__(**kwargs)
@@ -560,23 +584,29 @@ class ListBox(Spinner):
         super(ListBox, self).__init__(**kwargs)
         self.set_pos()
         self.bind(pos = self.update_handler, size = self.update_handler, text = self.on_text)
+        self.set_font_size(self.font_size)
 
     def on_text(self, instance, value):
         if len(self.values) == 0: return
 
     def update_handler(self, instance, value):
         self.set_pos()
+        self.update_dd()
 
     def set_pos(self):
         UserInterface.set_pos(self)
 
     def set_font_size(self, font_size): # this was added
+        self.font_size = font_size
+
+    def update_dd(self):
         dd = self._dropdown
         if not dd: return
         container = dd.container
         if not container: return
         for item in container.children[:]:
-            item.font_size = font_size
+            item.font_size = self.font_size
+            item.size = self.size
 
 class Slider(_Slider):
 

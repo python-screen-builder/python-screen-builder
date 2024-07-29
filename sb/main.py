@@ -1,7 +1,9 @@
+import sys
 import json
 
 from kivy.app import App
 from kivy.graphics import *
+from kivy.clock import Clock
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.uix.button import Button
@@ -17,10 +19,11 @@ from properties_layout import Property, PropertiesLayout
 from settings import *
 
 Config.set('input', 'mouse', 'mouse, multitouch_on_demand')
+sys.path.append(".") # fix path for exe version imports
 
 class Main(App):
 
-    version = "3.0"
+    version = "4.0"
 
     keyboard = Window.request_keyboard(None, None, 'text')
     focus = True
@@ -43,7 +46,7 @@ class Main(App):
 
         main_layout = BoxLayout(orientation = "vertical")
         menu = Menu(pos_hint = { 'top': 1 })
-        file_menu = SubMenu(text = 'File', values = [ 'Import', 'Export' ])
+        file_menu = SubMenu(text = 'File', values = [ 'Import', 'Export', 'Exit' ])
         edit_menu = SubMenu(text = 'Edit', values = [ 'Undo', 'Copy', 'Paste', 'Delete' ])
         help_menu = SubMenu(text = 'Help', values = [ 'About' ])
         menu.add_item(file_menu)
@@ -63,7 +66,7 @@ class Main(App):
         self.properties_layout.bind(minimum_height = self.properties_layout.setter('height'))
 
         widgets_splitter = Splitter(sizable_from = "right", size_hint = (.3, 1), strip_size = self.settings.strip_size)
-        props_splitter = Splitter(sizable_from = "left", size_hint = (.6, 1), strip_size = self.settings.strip_size)
+        props_splitter = Splitter(sizable_from = "left", size_hint = (.7, 1), strip_size = self.settings.strip_size)
         
         self.build_widgets_panel()
 
@@ -72,12 +75,14 @@ class Main(App):
 
         widgets_splitter.add_widget(self.widgets_layout)
         props_splitter.add_widget(self.props_view)
-        
+
         panel_layout.add_widget(widgets_splitter)
         panel_layout.add_widget(self.screen_builder)
         panel_layout.add_widget(props_splitter)
 
-        main_layout.add_widget(panel_layout)
+        # change to allow menu to stay on top 
+        panel_layout.padding = (0, 100, 0, -100)
+        main_layout.add_widget(panel_layout, 1)
 
         Window.size = (self.settings.window_width, self.settings.window_height)
         Window.clearcolor = self.settings.background_color
@@ -98,6 +103,9 @@ class Main(App):
         return True
     
     def on_confirm(self):
+        Clock.schedule_once(self.exit, .3)
+
+    def exit(self, *args):
         self.stop()
 
     def build_widgets_panel(self):
@@ -232,6 +240,10 @@ class Main(App):
     def on_file(self, button):
         if button.text == 'Import': self.import_screen(button)
         if button.text == 'Export': self.export_screen(button)
+        if button.text == 'Exit': self.on_exit(button)
+
+    def on_exit(self, button):
+        if self.on_request_close(button) == False: self.stop()
 
     def on_edit(self, button):
         if button.text == 'Undo': self.screen_builder.undo()

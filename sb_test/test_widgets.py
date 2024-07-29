@@ -28,6 +28,9 @@ class TestApp(App):
         self.test_screen.knob1.bind(value = self.on_knob)
         self.test_screen.knob2.bind(value = self.on_knob)
         self.test_screen.toggle1.bind(on_press = self.on_toggle)
+        self.test_screen.text1.bind(text = self.on_change)
+        self.test_screen.switch1.active = True
+        self.test_screen.switch1.bind(active = self.on_switch)
         for key in self.test_screen.piano.midi_notes:
             if key == None: continue
             key.bind(on_press = self.on_key)
@@ -41,6 +44,12 @@ class TestApp(App):
         print(value)
 
     def on_knob(self, instance, value):
+        print(value)
+
+    def on_change(self, instance, value):
+        print(value)
+
+    def on_switch(self, instance, value):
         print(value)
 
     def on_toggle(self, instance):

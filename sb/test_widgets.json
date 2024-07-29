@@ -3,7 +3,7 @@
         "name": "",
         "type": "Panel",
         "x": 40.0,
-        "y": 620.0,
+        "y": 621.0,
         "size": "[1160.0, 280.0]",
         "text": "",
         "halign": "left",
@@ -19,7 +19,7 @@
         "name": "list",
         "type": "ListBox",
         "x": 800.0,
-        "y": 120.0,
+        "y": 121.0,
         "size": "[320.0, 80.0]",
         "text": "List",
         "font_size": "30.0",
@@ -29,7 +29,7 @@
         "name": "slider",
         "type": "Slider",
         "x": 120.0,
-        "y": 320.0,
+        "y": 321.0,
         "size": "[500.0, 180.0]",
         "text": "slider",
         "orientation": "horizontal"
@@ -38,7 +38,7 @@
         "name": "piano",
         "type": "PianoKeyboard",
         "x": 80.0,
-        "y": 700.0,
+        "y": 701.0,
         "size": "[1080.0, 180.0]",
         "keyboard_size": "30",
         "start": "0"
@@ -47,7 +47,7 @@
         "name": "toggle1",
         "type": "ToggleButton",
         "x": 900.0,
-        "y": 280.0,
+        "y": 281.0,
         "size": "[120.0, 120.0]",
         "text": "Tog",
         "font_size": "50",
@@ -64,7 +64,7 @@
         "name": "knob1",
         "type": "Knob",
         "x": 120.0,
-        "y": 80.0,
+        "y": 81.0,
         "size": "[200, 200]",
         "text": "knob #1"
     },
@@ -72,8 +72,28 @@
         "name": "knob2",
         "type": "Knob",
         "x": 400.0,
-        "y": 80.0,
+        "y": 81.0,
         "size": "[200, 200]",
         "text": "knob #2"
+    },
+    {
+        "name": "switch1",
+        "type": "Switch",
+        "x": 640.0,
+        "y": 501.0,
+        "size": [
+            320.0,
+            60.0
+        ]
+    },
+    {
+        "name": "text1",
+        "type": "TextInput",
+        "x": 180.0,
+        "y": 501.0,
+        "size": [
+            400,
+            60
+        ]
     }
 ]

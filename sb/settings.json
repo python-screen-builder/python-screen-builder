@@ -334,6 +334,28 @@
             ]
         },
         {
+            "name": "Text",
+            "class": "TextInput",
+            "init": "TextInput()",
+            "properties": [
+                {
+                    "name": "name",
+                    "init": "TextInput()"
+                }
+            ]
+        },
+        {
+            "name": "Switch",
+            "class": "Switch",
+            "init": "Switch()",
+            "properties": [
+                {
+                    "name": "name",
+                    "init": "TextInput()"
+                }
+            ]
+        },
+        {
             "name": "Piano",
             "class": "PianoKeyboard",
             "init": "PianoKeyboard(keyboard_size = 30, size = (900, 100))",
@@ -352,33 +374,6 @@
                 },
                 {
                     "name": "start",
-                    "init": "TextInput()"
-                }
-            ]
-        },
-        {
-            "name": "StackLayout",
-            "class": "StackLayout",
-            "init": "StackLayout()",
-            "properties": [
-                {
-                    "name": "name",
-                    "init": "TextInput()"
-                },
-                {
-                    "name": "size",
-                    "init": "TextInput()"
-                }
-            ]
-        },
-        {
-            "name": "TestClass",
-            "class": "TestClass",
-            "init": "TestClass()",
-            "file": "test_class",
-            "properties": [
-                {
-                    "name": "name",
                     "init": "TextInput()"
                 }
             ]
