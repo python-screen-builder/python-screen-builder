@@ -7,12 +7,12 @@ The screen builder makes using Python and the Kivy framework fun and easy to use
 ## Welcome to version 4.0 of the Python Screen Builder project.
 
 ### Please read if you are using version 1.0
-```
+
 The latest version of the WidgetScreen class is now subclassed directly from the Kivy Screen class.
 There is also a new WidgetContainer class that works like the previous WidgetScreen class.
 So, if you have a version 1.0 application, just change the WidgetScreen references to use WidgetContainer.
 Please see the example test application below.
-```
+
 <marquee scrolldelay=20 loop=1>
 # it is fun to program in python if you have a nice gui builder
 </marquee>
