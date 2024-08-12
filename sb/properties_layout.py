@@ -140,7 +140,7 @@ class PropertiesLayout(StackLayout):
                 try:
                     if eval(value) == widget.button_down_color: return
                     setattr(widget, name, eval(value))
-                    widget.draw_color = widget.button_down_color
+                    #widget.draw_color = widget.button_down_color
                     widget.update_handler()
                 except:
                     pass

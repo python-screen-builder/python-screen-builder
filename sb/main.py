@@ -23,7 +23,7 @@ sys.path.append(".") # fix path for exe version imports
 
 class Main(App):
 
-    version = "4.0"
+    version = "5.0"
 
     keyboard = Window.request_keyboard(None, None, 'text')
     focus = True

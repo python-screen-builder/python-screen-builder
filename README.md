@@ -4,7 +4,7 @@ The screen builder makes using Python and the Kivy framework fun and easy to use
 
 <img src="screenshot.png">
 
-## Welcome to version 4.0 of the Python Screen Builder project.
+## Welcome to the Python Screen Builder project.
 
 ### Please read if you are using version 1.0
 
@@ -393,6 +393,12 @@ This will allow the Linux version to not make any Windows graphics initializatio
 - fixed radius input check for button and toggle button
 - fixed layout padding for screen builder window
 - added switch and text input widgets to pallet 
+
+## Version 5.0 Changes
+- make radius a ListProperty and check type in draw( )
+- make button_down_color a ListProperty
+- fixed piano keyboard widget to use parent width
+- added scroll_timeout properties scroll view
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

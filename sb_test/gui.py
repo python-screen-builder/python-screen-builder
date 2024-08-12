@@ -315,6 +315,9 @@ class Button(_Button):
     default_font_size = 40
 
     button_normal_color = ListProperty((0, 0, 0, 0))
+    button_down_color = ListProperty((0, 0, 0, 0))
+
+    radius = ListProperty((0, 0, 0, 0))
 
     def __init__(self, **kwargs):
         self._x = kwargs.pop('x', -1)
@@ -336,6 +339,9 @@ class Button(_Button):
     def on_button_normal_color(self, instance, value):
         self.draw_color = self.button_normal_color
 
+    def on_button_down_color(self, instance, value):
+        self.draw_color = self.button_down_color
+
     def update_handler(self, instance = None, value = None):
         self.set_image_pos()
         self.set_pos()
@@ -352,13 +358,13 @@ class Button(_Button):
         self.image.size = self.size # (self.size[0] / 2, self.size[1] / 2)
 
     def draw_button(self):
-        if self.radius == (0, 0, 0, 0) and self.border_width == 0:
+        if tuple(self.radius) == (0, 0, 0, 0) and self.border_width == 0:
             self.canvas.before.clear()
             return
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
-        if type(self.radius) not in [list, tuple]: return
+        if type(self.radius).__name__ not in ['ObservableList']: return
         if len(self.radius) < 4: return
         self.background_normal = ''
         self.background_down = ''
@@ -389,6 +395,9 @@ class ToggleButton(_ToggleButton):
     default_font_size = 40
 
     button_normal_color = ListProperty((0, 0, 0, 0))
+    button_down_color = ListProperty((0, 0, 0, 0))
+
+    radius = ListProperty((0, 0, 0, 0))
 
     def __init__(self, **kwargs):
         self._x = kwargs.pop('x', -1)
@@ -409,6 +418,9 @@ class ToggleButton(_ToggleButton):
     def on_button_normal_color(self, instance, value):
         self.draw_color = self.button_normal_color
 
+    def on_button_down_color(self, instance, value):
+        self.draw_color = self.button_down_color
+
     def update_handler(self, instance = None, value = None):
         self.set_pos()
 
@@ -417,13 +429,13 @@ class ToggleButton(_ToggleButton):
         self.draw_button()
 
     def draw_button(self):
-        if self.radius == (0, 0, 0, 0) and self.border_width == 0:
+        if tuple(self.radius) == (0, 0, 0, 0) and self.border_width == 0:
             self.canvas.before.clear()
             return
         Clock.schedule_once(self.draw, -1)
 
     def draw(self, *args):
-        if type(self.radius) not in [list, tuple]: return
+        if type(self.radius).__name__ not in ['ObservableList']: return
         if len(self.radius) < 4: return
         self.background_normal = ''
         self.background_down = ''
@@ -868,7 +880,7 @@ class WhiteKeys(_RelativeLayout):
     def get_width(self):
         if self.parent == None: return 100
         if self.parent.size_hint[0] == None: return self.size[0]
-        return Window.width
+        return self.parent.width
 
 class BlackKeys(_RelativeLayout):
     
@@ -906,7 +918,7 @@ class BlackKeys(_RelativeLayout):
     def get_width(self):
         if self.parent == None: return 100
         if self.parent.size_hint[0] == None: return self.size[0]
-        return Window.width
+        return self.parent.width
 
 class PianoKeyboard(_RelativeLayout):
 
