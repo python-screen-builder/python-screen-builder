@@ -942,22 +942,16 @@ class PianoKeyboard(_RelativeLayout):
         self.init_keyboard()
 
     def init_keyboard(self):
-        note = self.start
-        for index, b in enumerate(self.white_keys.keys):
-            self.midi_notes[note] = b
-            note += 2
-            k = index % 7
-            if k == 2 or k == 6:
-                note -= 1
-        note = self.start
-        for index, b in enumerate(self.black_keys.keys):
-            if b.opacity == 0:
-                note += 1
-                continue
-            self.midi_notes[note + 1] = b            
-            note += 2
+        white_index = 0
+        black_index = 0
         for index, note in enumerate(self.midi_notes):
-            if note == None: self.midi_notes[index] = _Button(disabled = True, opacity = 0)
+            if index < self.start or white_index > self.keyboard_size - 1:
+                self.midi_notes[index] = _Button(disabled = True, opacity = 0)
+            elif index % 12 not in [1, 3, 6, 8, 10]:
+                self.midi_notes[index] = self.white_keys.keys[white_index]; white_index += 1
+            else:
+                self.midi_notes[index] = self.black_keys.keys[black_index]; black_index += 1
+                if index % 12 in [3, 10]: black_index += 1
             self.midi_notes[index].id = index
         self.set_pos()
         self.white_keys.update_handler(self.white_keys, self.size)

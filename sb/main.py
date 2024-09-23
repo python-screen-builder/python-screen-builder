@@ -23,7 +23,7 @@ sys.path.append(".") # fix path for exe version imports
 
 class Main(App):
 
-    version = "5.0"
+    version = "6.0"
 
     keyboard = Window.request_keyboard(None, None, 'text')
     focus = True
@@ -94,6 +94,9 @@ class Main(App):
         self.keyboard.bind(on_key_up = self.on_key_up)
 
         self.main_layout = main_layout
+
+        if len(sys.argv) > 1: self.load_file(sys.argv[1])
+
         return main_layout
 
     def on_request_close(self, *largs, **kwargs):
@@ -169,6 +172,9 @@ class Main(App):
         filename = fd.askopenfilename(initialdir = '.', filetypes = [( 'json files', '*.json' )])
         if filename == '': return
         self.screen_builder.clear_widgets()
+        self.load_file(filename)
+
+    def load_file(self, filename):
         json_widgets = []
         with open(filename, 'r') as file:
             data = file.read()

@@ -6,20 +6,9 @@ The screen builder makes using Python and the Kivy framework fun and easy to use
 
 ## Welcome to the Python Screen Builder project.
 
-### Please read if you are using version 1.0
-
-The latest version of the WidgetScreen class is now subclassed directly from the Kivy Screen class.
-There is also a new WidgetContainer class that works like the previous WidgetScreen class.
-So, if you have a version 1.0 application, just change the WidgetScreen references to use WidgetContainer.
-Please see the example test application below.
-
-<marquee scrolldelay=20 loop=1>
-# it is fun to program in python if you have a nice gui builder
-</marquee>
-
 ## Requirements
 
-Python, of course. The screen builder is written completely in the latest version of Python using the Kivy framework.
+The screen builder is written completely in the latest version of Python using the Kivy framework.
 You will need to install Kivy in order to run the screen builder and write Python programs that use the screens.
 You can find out more about how to install Kivy here:
 <a href="https://kivy.org/doc/stable/gettingstarted/installation.html">Installing Kivy</a>
@@ -50,8 +39,13 @@ copy sb.exe "/Program files/Python/Scripts"
 ```
 Once the sb.exe is accessible via the system path, you can run the screen builder tool from anywhere.
 
-Note in version 3.0, a version of the settings.json file is included in the program itself.
-So, you only need to copy the settings.json file if you want modify settings.
+```
+sb.exe
+```
+Or to open a screen automatically from the command line:
+```
+sb.exe my_screen.json
+```
 
 ## How to use
 When you run the screen builder you can select from an array of widgets on the left sidebar.
@@ -399,6 +393,10 @@ This will allow the Linux version to not make any Windows graphics initializatio
 - make button_down_color a ListProperty
 - fixed piano keyboard widget to use parent width
 - added scroll_timeout properties scroll view
+
+## Version 6.0 Changes
+- allow screen builder to use command line file argument
+- fix piano keyboard widget initialize function
 
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
