@@ -91,12 +91,12 @@ class Screen(_Screen):
     def __init__(self, **kwargs):
         self.name = kwargs.pop('name', 'demo')
         super(Screen, self).__init__(**kwargs)
-        self.layout = _AnchorLayout()
-        super(_Screen, self).add_widget(self.layout)
+        self._layout = _AnchorLayout()
+        super(_Screen, self).add_widget(self._layout)
         self.menu = None
 
     def add_widget(self, widget):
-        self.layout.add_widget(widget)
+        self._layout.add_widget(widget)
 
     def build(self, program_name, globals): # globals = {} # was in new gui
         exec(compile(open(program_name + '.py').read(), program_name + '.py', 'exec'), globals)
@@ -381,12 +381,9 @@ class Button(_Button):
                 Color(rgba = border_color)
                 Line(width = border_width, rounded_rectangle = rounded_rectangle)
 
-    def on_press(self, *args):
-        self.draw_color = self.button_down_color
-        self.draw_button()
-
-    def on_release(self, *args):
-        self.draw_color = self.button_normal_color
+    def on_state(self, button, value):
+        if button.state == 'normal': self.draw_color = self.button_normal_color
+        if button.state == 'down': self.draw_color = self.button_down_color
         self.draw_button()
 
 class ToggleButton(_ToggleButton):
@@ -628,11 +625,12 @@ class Slider(_Slider):
         self._x = kwargs.pop('x', -1)
         self._y = kwargs.pop('y', -1)
         self.name = kwargs.pop('name', 'slider')
+        self.precision = kwargs.pop('precision', None)
         self.size_hint = (None, None)
         self.padding = 60
         super(Slider, self).__init__(**kwargs)
         self.name_label = Label(x = self._x, y = self._y, size = self.size, text = self.name, font_size = 25)
-        self.value_label = Label(x = self._x, y = self._y, size = self.size, text = str(round(self.value)), font_size = 25)
+        self.value_label = Label(x = self._x, y = self._y, size = self.size, text = str(round(self.value, self.precision)), font_size = 25)
         self.set_orientation(self.orientation)
         self.set_pos()
         self.add_widget(self.name_label)
@@ -655,7 +653,7 @@ class Slider(_Slider):
         UserInterface.set_pos(self)
 
     def update_value(self, instance, value):
-        self.value_label.text = str(round(value))
+        self.value_label.text = str(round(value, self.precision))
 
     def set_orientation(self, value):
         self.orientation = value
@@ -672,6 +670,7 @@ class NewSlider(_Slider): # new slider control
         self._x = kwargs.pop('x', -1)
         self._y = kwargs.pop('y', -1)
         self.name = kwargs.pop('name', 'slider')
+        self.precision = kwargs.pop('precision', None)
         self.size_hint = (None, None)
         self.padding = 60
         self.cursor_size = (80, 26)
@@ -680,9 +679,9 @@ class NewSlider(_Slider): # new slider control
         #self.value_track = True
         self.value_track_width = 10
         self.value_track_color = [0, 0, 0, 1]
-        super(Slider, self).__init__(**kwargs)
+        super(NewSlider, self).__init__(**kwargs)
         self.name_label = Label(x = self._x, y = self._y, size = self.size, text = self.name, font_size = 25)
-        self.value_label = Label(x = self._x, y = self._y, size = self.size, text = str(round(self.value)), font_size = 25)
+        self.value_label = Label(x = self._x, y = self._y, size = self.size, text = str(round(self.value, self.precision)), font_size = 25)
         self.set_orientation(self.orientation)
         self.set_pos()
         self.add_widget(self.name_label)
@@ -715,7 +714,7 @@ class NewSlider(_Slider): # new slider control
         UserInterface.set_pos(self)
 
     def update_value(self, instance, value):
-        self.value_label.text = str(round(value))
+        self.value_label.text = str(round(value, self.precision))
 
     def set_orientation(self, value):
         self.orientation = value
@@ -731,9 +730,7 @@ class Knob(_Label):
     default_value_color = (.8, .8, .8)
 
     value = NumericProperty(0)
-    #min = NumericProperty(0)
-    #max = NumericProperty(100)
-    range = BoundedNumericProperty(100)#(min, max)
+    range = BoundedNumericProperty(100)
 
     def __init__(self, **kwargs):
         self._x = kwargs.pop('x', -1)
@@ -741,6 +738,7 @@ class Knob(_Label):
         self.name = kwargs.pop('name', 'knob')
         self.value = kwargs.pop('value', .001)
         self.range = kwargs.pop('range', (0, 100))
+        self.precision = kwargs.pop('precision', None)
         self.knob_padding = kwargs.pop('knob_padding', 40)
         self.size_hint = (None, None)
         self.font_size = self.default_font_size
@@ -758,7 +756,6 @@ class Knob(_Label):
         self.label.halign = 'center'
         self.set_pos()
         self.add_widget(self.label)
-        #self.value = self.min + .00001
 
     def update_handler(self, instance, value):
         self.set_pos()
@@ -772,8 +769,8 @@ class Knob(_Label):
         self.size[0] = self.size[1]
 
     def on_value(self, instance, value):
-        self.value = value
-        self.angle = pow((value - self.min) / (self.max - self.min), 1.0) * 270
+        self.value = round(value, self.precision)
+        self.angle = pow((self.value - self.min) / (self.max - self.min), 1.0) * 270
         Clock.schedule_once(self.update_knob, -1)
 
     def update_knob(self, *args):        
@@ -789,7 +786,6 @@ class Knob(_Label):
         knob_pos = [self.pos[0] + self.knob_padding, self.pos[1] + self.knob_padding]
 
         if Widget(pos = knob_pos, size = knob_size).collide_point(touch.pos[0], touch.pos[1]):
-        # if self.collide_point(*touch.pos):
             self.update_angle(touch)
 
     def on_touch_move(self, touch):
@@ -797,7 +793,6 @@ class Knob(_Label):
         knob_pos = [self.pos[0] + self.knob_padding, self.pos[1] + self.knob_padding]
 
         if Widget(pos = knob_pos, size = knob_size).collide_point(touch.pos[0], touch.pos[1]):
-        # if self.collide_point(*touch.pos):
             self.update_angle(touch)
 
     def draw_knob(self):
@@ -814,8 +809,6 @@ class Knob(_Label):
             Ellipse(pos = knob_pos, size = knob_size, angle_start = 0, angle_end = self.angle)
             Color(0, 0, 0)    
             Ellipse(pos = knob_pos, size = knob_size, angle_start = self.angle, angle_end = 270)
-            #PopMatrix()
-            #PushMatrix()
             Color(rgb = tuple(self.face_color))
             size = (knob_size[0] - knob_size[0] * .3, knob_size[1] - knob_size[1] * .3)
             pos = (knob_pos[0] + knob_size[0] * .3 / 2, knob_pos[1] + knob_size[1] * .3 / 2)
@@ -844,7 +837,7 @@ class Knob(_Label):
         self.angle = angle
 
         relativeValue = pow((angle / 270.0), 1.0)
-        self.value = (relativeValue * (self.max - self.min)) + self.min
+        self.value = round(relativeValue * (self.max - self.min) + self.min, self.precision)
         self.draw_knob()
 
 class WhiteKeys(_RelativeLayout):

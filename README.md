@@ -398,6 +398,15 @@ This will allow the Linux version to not make any Windows graphics initializatio
 - allow screen builder to use command line file argument
 - fix piano keyboard widget initialize function
 
+## Version 7.0 Changes
+- fix NewSlider so it saves correctly
+- add precision to Slider, NewSlider, Knob
+
+## Version 8.0 Changes
+- fix import / export to use current file
+- fix Screen to use _layout instead of layout
+- fix Button to use on_state( ) - button stayed down if pressed and mouse moved out of bounds
+
 <!--
 **python-screen-builder/python-screen-builder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
